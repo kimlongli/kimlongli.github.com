@@ -314,7 +314,20 @@
       
         
           
-            
+            <p>MySQL数据库作业中需要创建多用户，并对其赋予相应的权限。于是我索性用create user语句创建了一个名为lijinlong的用户，如下：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">create</span> <span class="keyword">user</span> lijinlong@<span class="string">"%"</span> <span class="keyword">identified</span> <span class="keyword">by</span> <span class="string">"password"</span>;</div><div class="line"><span class="keyword">flush</span> <span class="keyword">privileges</span>;</div></pre></td></tr></table></figure>
+<p>@后面使用通配符是因为想要这个账户在任何主机都可以登录。创建好账户之后退出数据库，重新用lijinlong的账号登录，发现就算密码输入对了仍然是Access denied。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">$ mysql -u lijinlong -p</div><div class="line">Enter password: </div><div class="line">ERROR 1045 (28000): Access denied <span class="keyword">for</span> user <span class="string">'lijinlong'</span>@<span class="string">'localhost'</span> (using password: YES)</div></pre></td></tr></table></figure>
+<p>难道是lijinlong账户没有相应的权限，于是用root账户给账户lijinlong赋予了所有权限。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> lijinlong@<span class="string">"%"</span>;</div></pre></td></tr></table></figure>
+<p>重新登录，依然是Access denied。百思不得其解，于是去翻MySQL的用户手册，看到如下一段话。</p>
+<blockquote>
+<p>The ‘finley’@’localhost’ account is necessary if there is an anonymous-user account for localhost. Without the ‘finley’@’localhost’ account, that anonymous-user account takes precedence when finley connects from the local host and finley is treated as an anonymous user. The reason for this is that the anonymous-user account has a more specific Host column value than the ‘finley’@’%’ account and thus comes earlier in the user table sort order. (user table sorting is discussed in Section 6.2.4, “Access Control, Stage 1: Connection Verification”.)</p>
+</blockquote>
+<p>原来是由于新建的账户host为”%”，原生的匿名账户比新建的lijinlong账户更加具体，所以lijinlong会被视为匿名账户。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> lijinlong@<span class="string">"localhost"</span>;</div></pre></td></tr></table></figure>
+<p>成功解决问题。</p>
+
           
         
       
