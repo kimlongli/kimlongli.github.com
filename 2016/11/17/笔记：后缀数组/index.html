@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Jinlong's Blog">
 <meta property="og:description" content="介绍假如要实现这样一个功能，给定一个字符串str，找出str中重复的最长的子串，比如，给定”banana”，其中最长的出现重复的子串为ana（分别出现在第1个位置和第3个位置上），穷解法的时间复杂度为O(m * n^2)，利用后缀数组可以在O(nlogn + n)的复杂度下实现此功能。比如给定一个字符串”banana”，先列出其后缀：123456bananaananananaananaa
 然后对后">
-<meta property="og:updated_time" content="2016-11-16T18:00:16.000Z">
+<meta property="og:updated_time" content="2016-11-16T18:04:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="笔记：后缀数组">
 <meta name="twitter:description" content="介绍假如要实现这样一个功能，给定一个字符串str，找出str中重复的最长的子串，比如，给定”banana”，其中最长的出现重复的子串为ana（分别出现在第1个位置和第3个位置上），穷解法的时间复杂度为O(m * n^2)，利用后缀数组可以在O(nlogn + n)的复杂度下实现此功能。比如给定一个字符串”banana”，先列出其后缀：123456bananaananananaananaa
@@ -311,9 +311,10 @@
 <p>运行程序，输入banana，输出结果如下：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">$ ./a.out</div><div class="line">input the string:banana</div><div class="line">a</div><div class="line">ana</div><div class="line">anana</div><div class="line">banana</div><div class="line">na</div><div class="line">nana</div><div class="line">result:ana</div></pre></td></tr></table></figure></p>
 <h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>稍微修改以上给出的代码，读取《鲁宾逊漂流记》里面的内容，然后找出小说中重复过的最长的一句话：</p>
 <blockquote>
-<p>that if i did take this foolish step, god would not bless me, and i would have leisure hereafter to reflect upon having neglected his counsel<br>后缀数组还可用在文本编辑器的字符串搜索上，因为在文本编辑器中，可能需要频繁地进行搜索操作，所以每次搜索都使用KMP或者BM算法对文本就行遍历一遍那是不可行的，可以利用后缀数组建立平衡后缀树（skiplist也可以），这样每次搜索的成本就降到了O(logn)，大大提升了性能。</p>
-<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>《编程珠玑》第十五章 珍珠字符串</p>
+<p>that if i did take this foolish step, god would not bless me, and i would have leisure hereafter to reflect upon having neglected his counsel</p>
 </blockquote>
+<p>后缀数组还可用在文本编辑器的字符串搜索上，因为在文本编辑器中，可能需要频繁地进行搜索操作，所以每次搜索都使用KMP或者BM算法对文本就行遍历一遍那是不可行的，可以利用后缀数组建立后缀树（skiplist也可以），这样每次搜索的成本就降到了O(logn)，大大提升了性能。</p>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p>《编程珠玑》第十五章 珍珠字符串</p>
 
       
     </div>
