@@ -326,7 +326,7 @@
 </blockquote>
 <p>原来是由于新建的账户host为”%”，原生的匿名账户比新建的lijinlong账户更加具体，所以lijinlong会被视为匿名账户。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> lijinlong@<span class="string">"localhost"</span>;</div></pre></td></tr></table></figure>
-<p>成功解决问题。</p>
+<p>成功解决问题。<br>还有一种解决办法是直接删除掉无用的匿名账户。</p>
 
           
         

@@ -94,7 +94,7 @@
 <meta property="og:description" content="MySQL数据库作业中需要创建多用户，并对其赋予相应的权限。于是我索性用create user语句创建了一个名为lijinlong的用户，如下：
 12create user lijinlong@&quot;%&quot; identified by &quot;password&quot;;flush privileges;
 @后面使用通配符是因为想要这个账户在任何主机都可以登录。创建好账户之后退出数据库，重新用lijinlong的账号">
-<meta property="og:updated_time" content="2016-11-16T12:46:01.000Z">
+<meta property="og:updated_time" content="2016-11-16T12:48:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="备忘:MySQL创建用户中的坑">
 <meta name="twitter:description" content="MySQL数据库作业中需要创建多用户，并对其赋予相应的权限。于是我索性用create user语句创建了一个名为lijinlong的用户，如下：
@@ -329,7 +329,7 @@
 </blockquote>
 <p>原来是由于新建的账户host为”%”，原生的匿名账户比新建的lijinlong账户更加具体，所以lijinlong会被视为匿名账户。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">grant</span> all <span class="keyword">privileges</span> <span class="keyword">on</span> *.* <span class="keyword">to</span> lijinlong@<span class="string">"localhost"</span>;</div></pre></td></tr></table></figure>
-<p>成功解决问题。</p>
+<p>成功解决问题。<br>还有一种解决办法是直接删除掉无用的匿名账户。</p>
 
       
     </div>
