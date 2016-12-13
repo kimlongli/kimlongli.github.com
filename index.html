@@ -321,24 +321,13 @@
       
         
           
-            <h3 id="图形界面"><a href="#图形界面" class="headerlink" title="图形界面"></a>图形界面</h3><pre><code>由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。
-比如说在*nix系统中直接编译我们写好的代码成so库就好了，而在Windows中函数则要额外加上__declspec(dllexport)或__declspec(dllimport)声明，例如：
-
+            <h3 id="图形界面"><a href="#图形界面" class="headerlink" title="图形界面"></a>图形界面</h3><p>由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。<br>比如说在*nix系统中直接编译我们写好的代码成so库就好了，而在Windows中函数则要额外加上<strong>declspec(dllexport)或</strong>declspec(dllimport)声明，例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> BUILD_DLL</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> DLL_EXPORT __declspec(dllexport)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> DLL_EXPORT __declspec(dllimport)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</div><div class="line">	<span class="function">DLL_EXPORT <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> a + b;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-注意，如果是用C++，需要用extern &quot;C&quot; {}把导出函数括起来，否则C++中的函数名字修饰（Decorated Name）会导致在加载动态链接库中相应函数的时候找不到函数名
-
-另外附上*uix平台和Windows平台编译生成动态链接库的命令：
-Linux
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">g++ -shared <span class="_">-f</span>PIC -o libfivechess.so fivechess.cpp</div></pre></td></tr></table></figure>
-
-Windows
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">g++ -c -DBUILD fivechess.cpp</div><div class="line">g++ -shared -o fivechess.dll fivechess.o -Wl,--out-implib,libfivechess.a</div></pre></td></tr></table></figure>
-
-当应用需要发布的时候可以用pyinstaller等工具来把python脚本打包成exe等可执行文件。
-[!wuziqi3.jpg](/source/uploads/wuziqi3.jpg)
-[!wuziqi4.jpg](/source/uploads/wuziqi4.jpg)
-</code></pre><h3 id="最初的思路"><a href="#最初的思路" class="headerlink" title="最初的思路"></a>最初的思路</h3><pre><code>下面进入本次讨论的重点，算法部分。
+<p>注意，如果是用C++，需要用extern “C” {}把导出函数括起来，否则C++中的函数名字修饰（Decorated Name）会导致在加载动态链接库中相应函数的时候找不到函数名</p>
+<p>另外附上*uix平台和Windows平台编译生成动态链接库的命令：<br>Linux<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">g++ -shared <span class="_">-f</span>PIC -o libfivechess.so fivechess.cpp</div></pre></td></tr></table></figure></p>
+<p>Windows<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">g++ -c -DBUILD fivechess.cpp</div><div class="line">g++ -shared -o fivechess.dll fivechess.o -Wl,--out-implib,libfivechess.a</div></pre></td></tr></table></figure></p>
+<p>当应用需要发布的时候可以用pyinstaller等工具来把python脚本打包成exe等可执行文件。<br><a href="/source/uploads/wuziqi3.jpg">!wuziqi3.jpg</a><br><a href="/source/uploads/wuziqi4.jpg">!wuziqi4.jpg</a></p>
+<h3 id="最初的思路"><a href="#最初的思路" class="headerlink" title="最初的思路"></a>最初的思路</h3><pre><code>下面进入本次讨论的重点，算法部分。
 最初的思路是根据人的经验制定一个评分表，根据评分表对棋盘中每一个位置进行评分，选取评分最高的位置作为下一步走的棋。什么是评分表呢？看下图：
 [!score.jpg](/source/uploads/score.jpg)
 这是摘自董红安2005年论文“计算机五子棋博弈系统的研究与实现”中的评分表，图中共有16中不同的特征，在每一种特征中，O代表棋子，+代表空位，每一种特征的右侧有其对应的评分。在一个好的评分表中，威胁大的特征具有绝对优势的评分，再多威胁小的评分加起来也不可能超过威胁大的评分表。
