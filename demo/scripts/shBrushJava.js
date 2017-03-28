@@ -42,7 +42,8 @@
 			];
 
 		this.forHtmlScript({
-			left	: /(&lt;|<)%[@!=]? g,="" right="" :="" %(&gt;|="">)/g 
+			left	: /(&lt;|<)%[@!=]?/g, 
+			right	: /%(&gt;|>)/g 
 		});
 	};
 
@@ -54,4 +55,3 @@
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-</)%[@!=]?>

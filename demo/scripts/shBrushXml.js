@@ -25,7 +25,7 @@
 		{
 			var constructor = SyntaxHighlighter.Match,
 				code = match[0],
-				tag = new XRegExp('(&lt;|<)[\\s\\ \\?]*(?<name="">[:\\w-\\.]+)', 'xg').exec(code),
+				tag = new XRegExp('(&lt;|<)[\\s\\/\\?]*(?<name>[:\\w-\\.]+)', 'xg').exec(code),
 				result = []
 				;
 		
@@ -55,7 +55,7 @@
 		this.regexList = [
 			{ regex: new XRegExp('(\\&lt;|<)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|>)', 'gm'),			css: 'color2' },	// <![ ... [ ... ]]>
 			{ regex: SyntaxHighlighter.regexLib.xmlComments,												css: 'comments' },	// <!-- ... -->
-			{ regex: new XRegExp('(&lt;|<)[\\s\\ \\?]*(\\w+)(?<attributes="">.*?)[\\s\\/\\?]*(&gt;|>)', 'sg'), func: process }
+			{ regex: new XRegExp('(&lt;|<)[\\s\\/\\?]*(\\w+)(?<attributes>.*?)[\\s\\/\\?]*(&gt;|>)', 'sg'), func: process }
 		];
 	};
 
@@ -67,4 +67,3 @@
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-</)[\\s\\></)\\!\\[[\\w\\s]*?\\[(.|\\s)*?\\]\\](\\&gt;|></value></name></)[\\s\\>

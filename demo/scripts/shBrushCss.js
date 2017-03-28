@@ -77,7 +77,7 @@
 
 		this.forHtmlScript({ 
 			left: /(&lt;|<)\s*style.*?(&gt;|>)/gi, 
-			right: /(&lt;|<)\ \s*style\s*(&gt;|="">)/gi 
+			right: /(&lt;|<)\/\s*style\s*(&gt;|>)/gi 
 			});
 	};
 
@@ -89,4 +89,3 @@
 	// CommonJS
 	typeof(exports) != 'undefined' ? exports.Brush = Brush : null;
 })();
-</)\></)\s*style.*?(&gt;|>
