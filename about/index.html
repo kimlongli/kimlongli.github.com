@@ -262,8 +262,14 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="about/index.html"
-           data-title="新博客" data-url="http://kimlongli.github.io/about/index.html">
+      <div id="shuoshuo_comment">
+        <div id="comment_list" data-key="about/index.html">
+        </div>
+        <div id="post_box">
+          <input type="text" id="name_" placeholder="input your name here" /><br>
+          <textarea id="content_" placeholder="input what you want to say here"></textarea><br>
+          <button onclick="submitComment()">submit</button>
+        </div>
       </div>
     
   </div>
@@ -442,32 +448,32 @@
 
   
 
-  
-    
-  
+
 
   <script type="text/javascript">
-    var duoshuoQuery = {short_name:"kimlongli"};
+    var shuoshuoQuery = {short_name:""};
     (function() {
       var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.id = 'shuoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//23.106.145.179:8090/test/create.js';
       ds.charset = 'UTF-8';
       (document.getElementsByTagName('head')[0]
       || document.getElementsByTagName('body')[0]).appendChild(ds);
     })();
   </script>
 
+
+
+
+
   
-    
-    
-    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
 
 
 
+
+	
 
 
 
