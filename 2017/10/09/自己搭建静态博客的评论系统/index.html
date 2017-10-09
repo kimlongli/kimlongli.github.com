@@ -1,0 +1,655 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="李金隆的博客, Jinlong blog, 副业造轮子" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="起因本来博客上的第三方评论系统“多说”用的好好的，突然有一天一个朋友跟我说多说的评论系统现在已经不能用了，而且众多国内的评论系统也都已经停止运营，他的博客换上了Disqus(链接)。我上去他的博客一看发现博文底下空荡荡的什么也没有，Disqus并没有被加载出来。后来经了解发现原来如果想用Disqus，就必须翻到墙外去才能用。这么一来几乎所有的hexo评论系统在国内都不能用了。我于是想，既然我有自己">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自己搭建静态博客的评论系统">
+<meta property="og:url" content="http://kimlongli.github.io/2017/10/09/自己搭建静态博客的评论系统/index.html">
+<meta property="og:site_name" content="Jinlong's Blog">
+<meta property="og:description" content="起因本来博客上的第三方评论系统“多说”用的好好的，突然有一天一个朋友跟我说多说的评论系统现在已经不能用了，而且众多国内的评论系统也都已经停止运营，他的博客换上了Disqus(链接)。我上去他的博客一看发现博文底下空荡荡的什么也没有，Disqus并没有被加载出来。后来经了解发现原来如果想用Disqus，就必须翻到墙外去才能用。这么一来几乎所有的hexo评论系统在国内都不能用了。我于是想，既然我有自己">
+<meta property="og:image" content="http://kimlongli.github.io/uploads/layout.jpeg">
+<meta property="og:image" content="http://kimlongli.github.io/uploads/_layout.jpeg">
+<meta property="og:updated_time" content="2017-10-09T08:06:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自己搭建静态博客的评论系统">
+<meta name="twitter:description" content="起因本来博客上的第三方评论系统“多说”用的好好的，突然有一天一个朋友跟我说多说的评论系统现在已经不能用了，而且众多国内的评论系统也都已经停止运营，他的博客换上了Disqus(链接)。我上去他的博客一看发现博文底下空荡荡的什么也没有，Disqus并没有被加载出来。后来经了解发现原来如果想用Disqus，就必须翻到墙外去才能用。这么一来几乎所有的hexo评论系统在国内都不能用了。我于是想，既然我有自己">
+<meta name="twitter:image" content="http://kimlongli.github.io/uploads/layout.jpeg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://kimlongli.github.io/2017/10/09/自己搭建静态博客的评论系统/"/>
+
+
+
+
+
+  <title> 自己搭建静态博客的评论系统 | Jinlong's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Jinlong's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">副业造轮子</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2017/10/09/自己搭建静态博客的评论系统/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="李金隆">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/uploads/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Jinlong's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Jinlong's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                自己搭建静态博客的评论系统
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-10-09T14:23:48+08:00">
+                2017-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>本来博客上的第三方评论系统“多说”用的好好的，突然有一天一个朋友跟我说多说的评论系统现在已经不能用了，而且众多国内的评论系统也都已经停止运营，他的博客换上了Disqus(<a href="https://akaziki.github.io/2017/10/08/hexo%E6%B7%BB%E5%8A%A0%E8%AF%84%E8%AE%BA%E7%B3%BB%E7%BB%9F/" target="_blank" rel="external">链接</a>)。我上去他的博客一看发现博文底下空荡荡的什么也没有，Disqus并没有被加载出来。后来经了解发现原来如果想用Disqus，就必须翻到墙外去才能用。这么一来几乎所有的hexo评论系统在国内都不能用了。我于是想，既然我有自己的服务器，可不可以自己搭建一个像多说一样的评论系统呢。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><h4 id="hexo的主题构架"><a href="#hexo的主题构架" class="headerlink" title="hexo的主题构架"></a>hexo的主题构架</h4><p>我们先来借鉴一下多说在hexo中的实现，先看看hexo的主题构架（我用的主题是<a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">NexT.Pisces</a>。进入主题的layout目录<br><img src="/uploads/layout.jpeg" alt="layout.jpeg"><br>发现原来NexT.Pisces主题是用<a href="http://node-swig.github.io/swig-templates/" target="_blank" rel="external">swig</a>写的。我们来看看_layout.swig里面的内容:<br><img src="/uploads/_layout.jpeg" alt="_layout.jpeg"><br>如图中所示，_layout.swig里面与comment有关的内容有两处（图中用红方框标注）。我们先看_partials/comments.swig的内容，如下所示：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">&#123;% if page.comments %&#125;</div><div class="line">  &lt;div class="comments" id="comments"&gt;</div><div class="line">    &lt;% if (theme.duoshuo and theme.duoshuo.shortname) or theme.duoshuo_shortname %&#125;</div><div class="line">      &lt;div class="ds-thread" data-thread-key="&#123;&#123; page.path &#125;&#125;"</div><div class="line">           data-title="&#123;&#123; page.title &#125;&#125;" data-url="&#123;&#123; page.permalink &#125;&#125;"&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &#123;% elseif theme.facebook_sdk.enable and theme.facebook_comments_plugin.enable %&#125;</div><div class="line">      &lt;div class="fb-comments"</div><div class="line">           data-href="&#123;&#123; page.permalink &#125;&#125;"</div><div class="line">           data-numposts="&#123;&#123; theme.facebook_comments_plugin.num_of_posts &#125;&#125;"</div><div class="line">           data-width="&#123;&#123; theme.facebook_comments_plugin.width &#125;&#125;"</div><div class="line">           data-colorscheme="&#123;&#123; theme.facebook_comments_plugin.scheme &#125;&#125;"&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &#123;% elseif theme.disqus_shortname %&#125;</div><div class="line">      &lt;div id="disqus_thread"&gt;</div><div class="line">        &lt;noscript&gt;</div><div class="line">          Please enable JavaScript to view the</div><div class="line">          &lt;a href="//disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</div><div class="line">        &lt;/noscript&gt;</div><div class="line">      &lt;/div&gt;</div><div class="line">    &#123;% elseif theme.hypercomments_id %&#125;</div><div class="line">      &lt;div id="hypercomments_widget"&gt;&lt;/div&gt;</div><div class="line">    &#123;% endif %&#125;</div><div class="line">  &lt;/div&gt;</div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
+<p>在comments.swig中，先判断博客的评论功能是否为开启（page.comments是否为true），如果评论开启，则判断用户指定了哪一个评论系统，比如第一个if判断多说评论系统是否开启，第二个if判断facebook的评论插件是否开启等。这里拿多说举例，如果是多说评论系统，则插入一段html到网页中（应该是预留着用来渲染多说评论的样式的）：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ds-thread"</span> <span class="attr">data-thread-key</span>=<span class="string">"&#123;&#123; page.path &#125;&#125;"</span></span></div><div class="line">   <span class="attr">data-title</span>=<span class="string">"&#123;&#123; page.title &#125;&#125;"</span> <span class="attr">data-url</span>=<span class="string">"&#123;&#123; page.permalink &#125;&#125;"</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>接着我们看第二处，_scripts/third-party/comments.swig里面的内容：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;% include './comments/duoshuo.swig' %&#125;</div><div class="line">&#123;% include './comments/disqus.swig' %&#125;</div><div class="line">&#123;% include './comments/hypercomments.swig' %&#125;</div></pre></td></tr></table></figure></p>
+<p>里面简单地引进4个swig文件，以多说为例，我们接着跟进./comments/duoshuo.swig:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">&#123;% if (theme.duoshuo and theme.duoshuo.shortname) or theme.duoshuo_shortname %&#125;</div><div class="line"></div><div class="line">  ......</div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> duoshuoQuery = &#123;<span class="attr">short_name</span>:<span class="string">"&#123;&#123;duoshuo_shortname&#125;&#125;"</span>&#125;;</div><div class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">      ds.type = <span class="string">'text/javascript'</span>;ds.async = <span class="literal">true</span>;</div><div class="line">      ds.id = <span class="string">'duoshuo-script'</span>;</div><div class="line">      ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//static.duoshuo.com/embed.js'</span>;</div><div class="line">      ds.charset = <span class="string">'UTF-8'</span>;</div><div class="line">      (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]</div><div class="line">      || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);</div><div class="line">    &#125;)();</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line">  ......</div><div class="line"></div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
+<p>以上代码只贴出了与评论相关的内容，至于其它的一些多说文章搜索等功能相关的省略掉了。我们看上面的js代码，此段代码先创建一个script标签，接着将其src指向多说域名下的一个js<br>文件（此文件已经失效，我猜这个js的功能是获取数据，然后渲染_partials/comments.swig里面的多说相关的div，让其成为多说评论的最终样子）。<br>至此，多说评论系统在hexo中的前端实现就大致看明白了。</p>
+<h4 id="跨域请求与获取数据"><a href="#跨域请求与获取数据" class="headerlink" title="跨域请求与获取数据"></a>跨域请求与获取数据</h4><p>由于博客域名跟多说域名不是同一个域名，所以这里涉及到跨域传递信息的问题。在之后的实现中，我们使用jsonp的方式进行跨域传递信息。这里举一个jquery文档里面的官方例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;script&gt;</div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> flickerAPI = <span class="string">"http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?"</span>;</div><div class="line">  $.getJSON( flickerAPI, &#123;</div><div class="line">    <span class="attr">tags</span>: <span class="string">"mount rainier"</span>,</div><div class="line">    <span class="attr">tagmode</span>: <span class="string">"any"</span>,</div><div class="line">    <span class="attr">format</span>: <span class="string">"json"</span></div><div class="line">  &#125;)</div><div class="line">    .done(<span class="function"><span class="keyword">function</span>(<span class="params"> data </span>) </span>&#123;</div><div class="line">      $.each( data.items, <span class="function"><span class="keyword">function</span>(<span class="params"> i, item </span>) </span>&#123;</div><div class="line">        $( <span class="string">"&lt;img&gt;"</span> ).attr( <span class="string">"src"</span>, item.media.m ).appendTo( <span class="string">"#images"</span> );</div><div class="line">        <span class="keyword">if</span> ( i === <span class="number">3</span> ) &#123;</div><div class="line">          <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">      &#125;);</div><div class="line">    &#125;);</div><div class="line">&#125;)();</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
+<p>jquery会随机生成一个函数名，来替换掉flickerAPI里面的第二个？，假设这个函数名为jquery123456。只有服务器响应的数据格式为jquery123456(xxx)的时候才能成功调用done函数，其中xxx是json数据。根据约定，参数data的内容将会是是xxx的内容。</p>
+<h4 id="前端实现"><a href="#前端实现" class="headerlink" title="前端实现"></a>前端实现</h4><p>首先呢，我们修改_partials/comments.swig里面的内容，加入自己的评论框样式（暂且把自己搭建的这个第三方评论系统叫shuoshuo…..),如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&#123;% if page.comments %&#125;</div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"comments"</span> <span class="attr">id</span>=<span class="string">"comments"</span>&gt;</span></div><div class="line">    &#123;% if theme.shuoshuo  %&#125;</div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"shuoshuo_comment"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Comments<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">hr</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"comment_list"</span> <span class="attr">data-key</span>=<span class="string">"&#123;&#123; page.path &#125;&#125;"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"post_box"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"name_"</span> <span class="attr">placeholder</span>=<span class="string">"input your name here"</span> /&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">id</span>=<span class="string">"content_"</span> <span class="attr">placeholder</span>=<span class="string">"input what you want to say here"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">onclick</span>=<span class="string">"submitComment()"</span>&gt;</span>submit<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    &#123;% elif (theme.duoshuo and theme.duoshuo.shortname) or theme.duoshuo_shortname %&#125;</div><div class="line">    ......</div></pre></td></tr></table></figure></p>
+<p>此时记得在主题的_config.yml中加入一项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># shuoshuo</div><div class="line">shuoshuo: true</div></pre></td></tr></table></figure></p>
+<p>接着我们在_scripts/third-party/comments下新建一个swig文件叫shuoshuo.swig，内容如下：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&#123;% if theme.shuoshuo %&#125;</div><div class="line"></div><div class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="keyword">var</span> shuoshuoQuery = &#123;<span class="attr">short_name</span>:<span class="string">""</span>&#125;;</div><div class="line">    (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> ds = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">      ds.type = <span class="string">'text/javascript'</span>;</div><div class="line">      ds.async = <span class="literal">true</span>;</div><div class="line">      ds.id = <span class="string">'shuoshuo-script'</span>;</div><div class="line">      ds.src = (<span class="built_in">document</span>.location.protocol == <span class="string">'https:'</span> ? <span class="string">'https:'</span> : <span class="string">'http:'</span>) + <span class="string">'//23.106.145.179:8090/test/create.js'</span>;</div><div class="line">      ds.charset = <span class="string">'UTF-8'</span>;</div><div class="line">      (<span class="built_in">document</span>.getElementsByTagName(<span class="string">'head'</span>)[<span class="number">0</span>]</div><div class="line">      || <span class="built_in">document</span>.getElementsByTagName(<span class="string">'body'</span>)[<span class="number">0</span>]).appendChild(ds);</div><div class="line">    &#125;)();</div><div class="line">  <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line">&#123;% endif %&#125;</div></pre></td></tr></table></figure></p>
+<p>代码功能很简单，就是动态引进一个js脚本23.106.145.179:8090/test/create.js（获取数据和渲染评论的代码将会在里面，23.106.145.179是我的服务器地址）。接着我们修改_scripts/third-party/comments.swig将shuoshuo.swig include进来：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;% include './comments/duoshuo.swig' %&#125;</div><div class="line">&#123;% include './comments/shuoshuo.swig' %&#125;</div><div class="line">&#123;% include './comments/disqus.swig' %&#125;</div><div class="line">&#123;% include './comments/hypercomments.swig' %&#125;</div></pre></td></tr></table></figure></p>
+<p>最后呢，我们看看23.106.145.179:8090/test/create.js到底干了什么：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//闭包</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> box = $(<span class="string">'#comment_list'</span>);</div><div class="line">	<span class="keyword">var</span> key = box.data(<span class="string">'key'</span>);</div><div class="line"></div><div class="line">	</div><div class="line">	<span class="comment">//利用jsonp的方式从服务器获取评论数据，接着渲染在网页上</span></div><div class="line">	<span class="built_in">window</span>.loadComment = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		$.getJSON(<span class="string">"http://23.106.145.179:8090/test/?jsonp=?"</span>, &#123;</div><div class="line">			<span class="attr">key</span>: key</div><div class="line">		&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">			prehtml = <span class="string">""</span>;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; data.length; i++) &#123;</div><div class="line">				prehtml += <span class="string">"&lt;p&gt;name: "</span> + data[i].name + <span class="string">"&lt;br&gt;time: "</span> + data[i].createTime + <span class="string">"&lt;br&gt;content: "</span> + data[i].content + <span class="string">"&lt;/p&gt;"</span>;</div><div class="line">			&#125;</div><div class="line">			box.html(prehtml);</div><div class="line">		&#125;);	</div><div class="line">	&#125;</div><div class="line"></div><div class="line"></div><div class="line">	<span class="comment">//向服务器提交评论，由于ajax不允许跨域，所以依然使用jsonp的方法</span></div><div class="line">	<span class="built_in">window</span>.submitComment = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		</div><div class="line">		<span class="keyword">var</span> name = $(<span class="string">'#name_'</span>).val();</div><div class="line">        	<span class="keyword">var</span> content = $(<span class="string">'#content_'</span>).val();</div><div class="line"></div><div class="line">		<span class="keyword">if</span>(name == <span class="literal">undefined</span> || name == <span class="string">""</span> || content == <span class="literal">undefined</span> || content == <span class="string">""</span>) &#123;</div><div class="line">			alert(<span class="string">"name or comment can not be null"</span>);</div><div class="line">			<span class="keyword">return</span>;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		$.getJSON(<span class="string">"http://23.106.145.179:8090/test/post_comment.jsp?jsonp=?"</span>, &#123;</div><div class="line">			<span class="attr">key</span>: key,</div><div class="line">			<span class="attr">name</span>: name, </div><div class="line">			<span class="attr">content</span>: content</div><div class="line">		&#125;).done(<span class="function"><span class="keyword">function</span>(<span class="params">data</span>) </span>&#123;</div><div class="line">			<span class="built_in">console</span>.log(data);</div><div class="line">			loadComment();</div><div class="line">			$(<span class="string">'#name_'</span>).val(<span class="string">''</span>);</div><div class="line">			$(<span class="string">'#content_'</span>).val(<span class="string">''</span>);</div><div class="line">		&#125;);</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="comment">//网页刚被打开的时候加载好评论</span></div><div class="line">	loadComment();</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<h4 id="后端实现"><a href="#后端实现" class="headerlink" title="后端实现"></a>后端实现</h4><p>后端要做的工作比较简单，就是负责相应客户端的请求和存储数据就好了，另外要防范一下xss和sql注入，我们来看看数据库结构：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">create table comment( </div><div class="line">	id int primary key auto_increment, </div><div class="line">	domain varchar(128) not null, </div><div class="line">	comment_key varchar(200) not null, </div><div class="line">	name varchar(128) not null, </div><div class="line">	content varchar(2048) not null, </div><div class="line">	create_time timestamp default current_timestamp </div><div class="line">);</div></pre></td></tr></table></figure></p>
+<p>标识一篇文章的评论列表的组合键为(domain:域名，comment_key:该域名下的文章路径或者文章名)</p>
+<h4 id="https之痛"><a href="#https之痛" class="headerlink" title="https之痛"></a>https之痛</h4><p>由于github pages中强制要求使用https协议，在使用https网站中使用http外链是不允许的，我并没有https证书，无奈之下只能将博客转到国内的coding的pages服务上。</p>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>如下面所示，自己写的这个第三方评论功能并没有样式，看起来比较简朴，一个比较牵强的理由是这样比较显复古风（其实是因为博主懒得写了0.0）。原理挺简单的，有兴趣的朋友可以自己搭建一个。如果自己懒得写了，也可以给我发一封邮件（邮箱地址在博客的“关于我”中可以找到），我可以把你的域名加入我服务器的允许域名中。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/26/快速幂算法/" rel="next" title="快速幂运算算法">
+                <i class="fa fa-chevron-left"></i> 快速幂运算算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="shuoshuo_comment">
+        <h3>Comments</h3>
+        <hr>
+        <div id="comment_list" data-key="2017/10/09/自己搭建静态博客的评论系统/">
+        </div>
+        <div id="post_box">
+          <input type="text" id="name_" placeholder="input your name here" /><br>
+          <textarea id="content_" placeholder="input what you want to say here"></textarea><br>
+          <button onclick="submitComment()">submit</button>
+        </div>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="李金隆" />
+          <p class="site-author-name" itemprop="name">李金隆</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">16</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#hexo的主题构架"><span class="nav-number">2.1.</span> <span class="nav-text">hexo的主题构架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#跨域请求与获取数据"><span class="nav-number">2.2.</span> <span class="nav-text">跨域请求与获取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#前端实现"><span class="nav-number">2.3.</span> <span class="nav-text">前端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#后端实现"><span class="nav-number">2.4.</span> <span class="nav-text">后端实现</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#https之痛"><span class="nav-number">2.5.</span> <span class="nav-text">https之痛</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#后记"><span class="nav-number">3.</span> <span class="nav-text">后记</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">李金隆</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+
+
+  <script type="text/javascript">
+    var shuoshuoQuery = {short_name:""};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';
+      ds.async = true;
+      ds.id = 'shuoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//23.106.145.179:8090/test/create.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+
+
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
