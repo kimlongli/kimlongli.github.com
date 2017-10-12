@@ -263,17 +263,26 @@
           
   <div class="comments" id="comments">
     
+      <!-- 判断是否是https协议，如果是https协议，则默认不加载 -->
       <div id="shuoshuo_comment">
-        <h3>Comments</h3>
-        <hr>
-        <div id="comment_list" data-key="about/index.html">
-        </div>
-        <div id="post_box">
-          <input type="text" id="name_" placeholder="input your name here" /><br>
-          <textarea id="content_" placeholder="input what you want to say here"></textarea><br>
-          <button onclick="submitComment()">submit</button>
-        </div>
       </div>
+      <script type="text/javascript">
+          if(document.location.protocol == "http:") {
+            document.getElementById("shuoshuo_comment").innerHTML = '<h3>Comments</h3>\
+              <hr>\
+              <div id="comment_list" data-key="about/index.html">\
+              </div>\
+              <div id="post_box">\
+                <input type="text" id="name_" placeholder="input your name here" /><br>\
+                <textarea id="content_" placeholder="input what you want to say here"></textarea><br>\
+                <button onclick="submitComment()">submit</button>\
+              </div>';
+          }
+          else {
+            //do nothing
+          }
+      </script>
+      
     
   </div>
 
