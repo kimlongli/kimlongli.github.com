@@ -84,19 +84,19 @@
 
 
 
-<meta name="description" content="起因很多同学对于UOOC上的这种限制应该并不陌生，有没有办法可以解除这个限制呢？这是我很久以前的一个想法了，但是一直都懒于去实现，对于UOOC视频失去焦点时自动暂停的这种限制，都是自己打开浏览器，手动改改其中的JavaScript，让其解除限制，然而这种方法神烦，当页面重新加载的时候，又要重新手动修改JavaScript代码。于是，本文所要讲述的这个插件诞生了，技术手段比较简单，这里就不阐述了。但">
+<meta name="description" content="结构哈希树的结构如下图所示主要思想是：插入的每一个数据通过模多个质数来确定在树中的位置。图为四层哈希树，除第一层外每一层都会有一个质数对即将插入的数取模，质数从最小开始，逐步增大，如图中第二层的质数为2，第三层为3，第四层为5（如果有第五层则为7）。首先假设最下面一层（第四层）才存储数据，其它层（第一道三层）都不存储数据。假如要插入28，则其检索路径就如上图所示。最终它被插入到第四层的绿色节点中。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="UOOC插件">
-<meta property="og:url" content="http://kimlongli.github.io/2016/11/17/UOOC插件/index.html">
+<meta property="og:title" content="哈希树笔记">
+<meta property="og:url" content="http://kimlongli.github.io/2017/11/04/哈希树笔记/index.html">
 <meta property="og:site_name" content="Jinlong's Blog">
-<meta property="og:description" content="起因很多同学对于UOOC上的这种限制应该并不陌生，有没有办法可以解除这个限制呢？这是我很久以前的一个想法了，但是一直都懒于去实现，对于UOOC视频失去焦点时自动暂停的这种限制，都是自己打开浏览器，手动改改其中的JavaScript，让其解除限制，然而这种方法神烦，当页面重新加载的时候，又要重新手动修改JavaScript代码。于是，本文所要讲述的这个插件诞生了，技术手段比较简单，这里就不阐述了。但">
-<meta property="og:image" content="http://kimlongli.github.io/uploads/uooc2.jpg">
-<meta property="og:image" content="http://kimlongli.github.io/uploads/uooc1.jpg">
-<meta property="og:updated_time" content="2016-11-17T07:26:51.000Z">
+<meta property="og:description" content="结构哈希树的结构如下图所示主要思想是：插入的每一个数据通过模多个质数来确定在树中的位置。图为四层哈希树，除第一层外每一层都会有一个质数对即将插入的数取模，质数从最小开始，逐步增大，如图中第二层的质数为2，第三层为3，第四层为5（如果有第五层则为7）。首先假设最下面一层（第四层）才存储数据，其它层（第一道三层）都不存储数据。假如要插入28，则其检索路径就如上图所示。最终它被插入到第四层的绿色节点中。">
+<meta property="og:image" content="http://kimlongli.github.io/uploads/hashtree.jpg">
+<meta property="og:image" content="http://kimlongli.github.io/uploads/hashtree1.png">
+<meta property="og:updated_time" content="2017-11-04T14:11:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="UOOC插件">
-<meta name="twitter:description" content="起因很多同学对于UOOC上的这种限制应该并不陌生，有没有办法可以解除这个限制呢？这是我很久以前的一个想法了，但是一直都懒于去实现，对于UOOC视频失去焦点时自动暂停的这种限制，都是自己打开浏览器，手动改改其中的JavaScript，让其解除限制，然而这种方法神烦，当页面重新加载的时候，又要重新手动修改JavaScript代码。于是，本文所要讲述的这个插件诞生了，技术手段比较简单，这里就不阐述了。但">
-<meta name="twitter:image" content="http://kimlongli.github.io/uploads/uooc2.jpg">
+<meta name="twitter:title" content="哈希树笔记">
+<meta name="twitter:description" content="结构哈希树的结构如下图所示主要思想是：插入的每一个数据通过模多个质数来确定在树中的位置。图为四层哈希树，除第一层外每一层都会有一个质数对即将插入的数取模，质数从最小开始，逐步增大，如图中第二层的质数为2，第三层为3，第四层为5（如果有第五层则为7）。首先假设最下面一层（第四层）才存储数据，其它层（第一道三层）都不存储数据。假如要插入28，则其检索路径就如上图所示。最终它被插入到第四层的绿色节点中。">
+<meta name="twitter:image" content="http://kimlongli.github.io/uploads/hashtree.jpg">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://kimlongli.github.io/2016/11/17/UOOC插件/"/>
+  <link rel="canonical" href="http://kimlongli.github.io/2017/11/04/哈希树笔记/"/>
 
 
 
 
 
-  <title> UOOC插件 | Jinlong's Blog </title>
+  <title> 哈希树笔记 | Jinlong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -241,7 +241,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2016/11/17/UOOC插件/">
+  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2017/11/04/哈希树笔记/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李金隆">
@@ -265,7 +265,7 @@
             
             
               
-                UOOC插件
+                哈希树笔记
               
             
           </h1>
@@ -278,8 +278,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-11-17T15:08:19+08:00">
-                2016-11-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-04T17:44:51+08:00">
+                2017-11-04
               </time>
             
 
@@ -314,10 +314,12 @@
       
 
       
-        <h3 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h3><p>很多同学对于UOOC上的这种限制应该并不陌生，有没有办法可以解除这个限制呢？这是我很久以前的一个想法了，但是一直都懒于去实现，对于UOOC视频失去焦点时自动暂停的这种限制，都是自己打开浏览器，手动改改其中的JavaScript，让其解除限制，然而这种方法神烦，当页面重新加载的时候，又要重新手动修改JavaScript代码。于是，本文所要讲述的这个插件诞生了，技术手段比较简单，这里就不阐述了。但不可否认，它非常的实用，大家感兴趣可以按以下指引安装到自己的浏览器上。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>下载地址：<a href="https://kimlongli.github.io/files/uooc.crx">https://kimlongli.github.io/files/uooc.crx</a><br>（注：支持的浏览器有chrome浏览器或者如360极速浏览器、猎豹浏览器这种带有chrome内核的浏览器，如果用chrome直接点击链接下载，由于此插件不是google应用商店上面的插件，所以会提示插件安装失败，可以换用另外一种方式下载，鼠标右键，另存为，然后按照下面的方法去安装）<br>猎豹浏览器和360浏览器直接点击下载连接安装即可。<br>chrome安装方法如下：<br>根据如上给出的下载地址下载好uooc.crx，然后打开chrome浏览器的[更多工具-&gt;拓展程序]，然后把uooc.crx拖曳进来就行了，期间会提示是否添加插件之类的提示，按指示操作就好了。<br>插件安装截图：<br><img src="/uploads/uooc2.jpg" alt="uooc2.jpeg"><br><img src="/uploads/uooc1.jpg" alt="uooc1.jpeg"></p>
-<h3 id="A-amp-Q"><a href="#A-amp-Q" class="headerlink" title="A&amp;Q"></a>A&amp;Q</h3><p>Q:发现添加了这个UOOC插件之后，我的视频就暂停不了了，那应该怎样暂停呢？<br>A:点击网页上方的关闭按钮就好啦<br>Q:停用了这个插件之后，当我想要再次开启的时候，发现其提示是”并非来自Chrome网上应用商店”，然后开启的框框点击不了。<br>A:先卸载掉这个插件，再重新添加就好啦。<br>Q:UOOC网站有两个，一个是<a href="http://www.uooc.online/" target="_blank" rel="external">http://www.uooc.online/</a>，另一个是<a href="http://uooc.net.cn/portal" target="_blank" rel="external">http://uooc.net.cn/portal</a>，插件对两个网站都有效吗？<br>A:对<a href="http://www.uooc.online/" target="_blank" rel="external">http://www.uooc.online/</a>的支持比较好，基本功能都能用，但对于<a href="http://uooc.net.cn/portal" target="_blank" rel="external">http://uooc.net.cn/portal</a>不支持快进功能。</p>
-<h3 id="欢迎反馈"><a href="#欢迎反馈" class="headerlink" title="欢迎反馈"></a>欢迎反馈</h3><p>插件处于测试阶段，可能会有bug，欢迎向我反馈：kimlongli@icloud.com</p>
+        <h3 id="结构"><a href="#结构" class="headerlink" title="结构"></a>结构</h3><p>哈希树的结构如下图所示<br><img src="/uploads/hashtree.jpg" alt="hashtree.jpg"><br>主要思想是：插入的每一个数据通过模多个质数来确定在树中的位置。图为四层哈希树，除第一层外每一层都会有一个质数对即将插入的数取模，质数从最小开始，逐步增大，如图中第二层的质数为2，第三层为3，第四层为5（如果有第五层则为7）。首先假设最下面一层（第四层）才存储数据，其它层（第一道三层）都不存储数据。假如要插入28，则其检索路径就如上图所示。最终它被插入到第四层的绿色节点中。</p>
+<h3 id="容量"><a href="#容量" class="headerlink" title="容量"></a>容量</h3><p>基于哈希树最下面一层才存储数据的假设，一个4层哈希树的存储容量为<br>2 * 3 * 5 = 30</p>
+<h3 id="容量内不会发生冲突"><a href="#容量内不会发生冲突" class="headerlink" title="容量内不会发生冲突"></a>容量内不会发生冲突</h3><p>哈希数据结构最主要的问题是解决键值的冲突。神奇的是，哈希树在容量范围内并不会发生冲突，比如上图的四层哈希树的键值在30以内并不会发生冲突。一个8层的哈希树的容量为：<br>2 * 3 * 5 * 7 * 11 * 13 * 17 = 510510<br>且键值在510510内不会发生冲突。<br>证明如下：</p>
+<p>要证明哈希树在容量范围内并不会发生冲突，只需要证明树中存储数据的任意一个节点只对应容量范围内的唯一一个数即可。<br>设现有一颗n + 1层的哈希树，从第二层到第n+1层的质数分别为m<sub>1</sub>,m<sub>2</sub>,m<sub>3</sub>…m<sub>n</sub>。现有一个容量范围内的数据x，x除以m<sub>1</sub>的余数为a<sub>1</sub>，除以m<sub>2</sub>的余数为a<sub>2</sub>，以此类推。即：<br>x ≡ a<sub>1</sub> (mod m<sub>1</sub>)<br>x ≡ a<sub>2</sub> (mod m<sub>2</sub>)<br>x ≡ a<sub>3</sub> (mod m<sub>3</sub>)<br>…<br>x ≡ a<sub>n</sub> (mod m<sub>n</sub>)<br>令<br>t<sub>1</sub> = k<sub>1</sub>m<sub>1</sub> + a<sub>1</sub>(k<sub>1</sub>为非负整数，下面同上)<br>t<sub>2</sub> = k<sub>2</sub>m<sub>2</sub> + a<sub>2</sub><br>…<br>t<sub>n</sub> = k<sub>n</sub>m<sub>n</sub> + a<sub>n</sub><br>下面我们试着构造T = t<sub>1</sub> + t<sub>2</sub> + … + t<sub>n</sub>，使得T满足：<br>T ≡ a<sub>1</sub> (mod m<sub>1</sub>)<br>T ≡ a<sub>2</sub> (mod m<sub>2</sub>)<br>T ≡ a<sub>3</sub> (mod m<sub>3</sub>)<br>…<br>T ≡ a<sub>n</sub> (mod m<sub>n</sub>)<br>我们知道，如果t<sub>1</sub> % m<sub>1</sub> = a<sub>1</sub>，则(t<sub>1</sub> + km<sub>1</sub>) % m<sub>1</sub> = a<sub>1</sub>，所以若要(t<sub>1</sub> + t<sub>2</sub>) % m<sub>1</sub> = a<sub>1</sub>，则需t<sub>2</sub>为m<sub>1</sub>的倍数，以此类推，若要(t<sub>1</sub> + t<sub>2</sub> + … + t<sub>n</sub>) % m<sub>1</sub> = a<sub>1</sub>，则当t<sub>2</sub>,t<sub>3</sub>…t<sub>n</sub>都为m<sub>1</sub>的倍数的时候,等式成立。所以若要：<br>T % m<sub>1</sub> = a<sub>1</sub><br>T % m<sub>2</sub> = a<sub>2</sub><br>…<br>T % m<sub>n</sub> = a<sub>n</sub><br>则：<br>t<sub>1</sub>除以m<sub>1</sub>余a<sub>1</sub>，t<sub>2</sub>,t<sub>3</sub> … t<sub>n</sub>都是m<sub>1</sub>的倍数<br>t<sub>2</sub>除以m<sub>2</sub>余a<sub>2</sub>，t<sub>1</sub>,t<sub>3</sub> … t<sub>n</sub>都是m<sub>2</sub>的倍数<br>…<br>t<sub>n</sub>除以m<sub>n</sub>余a<sub>n</sub>，t<sub>1</sub>,t<sub>2</sub> … t<sub>n - 1</sub>都是m<sub>n</sub>的倍数<br>整理得：<br>t<sub>1</sub>除以m<sub>1</sub>余a<sub>1</sub>，t<sub>1</sub>是m<sub>2</sub>,m<sub>3</sub>…m<sub>n</sub>的公倍数<br>t<sub>2</sub>除以m<sub>2</sub>余a<sub>2</sub>，t<sub>2</sub>是m<sub>1</sub>,m<sub>3</sub>…m<sub>n</sub>的公倍数<br>…<br>t<sub>n</sub>除以m<sub>n</sub>余a<sub>n</sub>，t<sub>n</sub>是m<sub>1</sub>,m<sub>2</sub>…m<sub>n - 1</sub>的公倍数<br>置：<br>t<sub>1</sub>为满足  除以m<sub>1</sub>余a<sub>1</sub>且为(m<sub>2</sub>m<sub>3</sub>…m<sub>n</sub>)的倍数  的数<br>t<sub>2</sub>为满足  除以m<sub>2</sub>余a<sub>2</sub>且为(m<sub>1</sub>m<sub>3</sub>…m<sub>n</sub>)的倍数  的数<br>…<br>t<sub>n</sub>为满足  除以m<sub>n</sub>余a<sub>n</sub>且为(m<sub>1</sub>m<sub>2</sub>…m<sub>n - 1</sub>)的倍数  的数<br>即：<br>t<sub>i</sub> = a<sub>i</sub>M<sub>i</sub>M<sub>i</sub><sup>-1</sup><br>（其中M = m<sub>1</sub> + m<sub>2</sub> + … + m<sub>i</sub>, M<sub>i</sub> = M / m<sub>i</sub>, M<sub>i</sub><sup>-1</sup>为M<sub>i</sub>的逆元）<br>此时T = t<sub>1</sub> + t<sub>2</sub> + … + t<sub>n</sub>满足：<br>T % m<sub>1</sub> = a<sub>1</sub><br>T % m<sub>2</sub> = a<sub>2</sub><br>…<br>T % m<sub>n</sub> = a<sub>n</sub><br>但此时的T不是最小解。若a % b = c，则（a - kb) % b = c，所以<br>x = T - kM（k尽量大，只要x不为负即可）<br>所以x = T % M，即:<br>x = (a<sub>1</sub>M<sub>1</sub>M<sub>1</sub><sup>-1</sup> + a<sub>2</sub>M<sub>2</sub>M<sub>2</sub><sup>-1</sup> + … + a<sub>n</sub>M<sub>n</sub>M<sub>n</sub><sup>-1</sup>) % (m<sub>1</sub>m<sub>2</sub>…m<sub>n</sub>)<br>所以x是一个小于容量M的唯一的整数解，所以哈希树最后一层的每个位置都可以对应一个容量内的唯一一个整数，所以哈希树在容量内不会发生冲突。</p>
+<h3 id="变体"><a href="#变体" class="headerlink" title="变体"></a>变体</h3><p>以上所述的哈希树只是在最后一层可以存储数据，容量为：<br>m<sub>1</sub>m<sub>2</sub>…m<sub>n</sub><br>事实上，为了节省空间，第二层到最后一层都可以存储数据，下面这张图很好地说明了这一点：<br><img src="/uploads/hashtree1.png" alt="hashtree1.png"><br>变体的容量为：<br>m<sub>1</sub> + m<sub>1</sub>m<sub>2</sub> + m<sub>1</sub>m<sub>2</sub>m<sub>3</sub> + … + m<sub>1</sub>m<sub>2</sub>…m<sub>n</sub></p>
+<h3 id="与哈希表比较"><a href="#与哈希表比较" class="headerlink" title="与哈希表比较"></a>与哈希表比较</h3><p>哈希树与哈希表的能实现的功能基本一样，但与哈希表不同的是，哈希树算法是稳定算法，查询一个数据的算法复杂度是O(k)，而哈希表查询一个数据正常情况下是O(1)。而且当需要更多的空间存储数据的时候，哈希树只需要增加层数即可，而哈希表需要更多的空间存储数据时则需要rehash并对空间扩容，相对比较麻烦。</p>
 
       
     </div>
@@ -344,8 +346,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/11/17/笔记：后缀数组/" rel="next" title="笔记：后缀数组">
-                <i class="fa fa-chevron-left"></i> 笔记：后缀数组
+              <a href="/2017/10/09/自己搭建静态博客的评论系统/" rel="next" title="自己搭建静态博客的评论系统">
+                <i class="fa fa-chevron-left"></i> 自己搭建静态博客的评论系统
               </a>
             
           </div>
@@ -353,10 +355,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/11/18/Redis源代码分析之有序集合/" rel="prev" title="Redis源代码分析之有序集合">
-                Redis源代码分析之有序集合 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -389,7 +387,7 @@
           if(document.location.protocol == "http:") {
             document.getElementById("shuoshuo_comment").innerHTML = '<h3>Comments</h3>\
               <hr>\
-              <div id="comment_list" data-key="2016/11/17/UOOC插件/">\
+              <div id="comment_list" data-key="2017/11/04/哈希树笔记/">\
               </div>\
               <div id="post_box">\
                 <input type="text" id="name_" placeholder="input your name here" /><br>\
@@ -483,7 +481,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#起因"><span class="nav-number">1.</span> <span class="nav-text">起因</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#A-amp-Q"><span class="nav-number">3.</span> <span class="nav-text">A&Q</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#欢迎反馈"><span class="nav-number">4.</span> <span class="nav-text">欢迎反馈</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构"><span class="nav-number">1.</span> <span class="nav-text">结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容量"><span class="nav-number">2.</span> <span class="nav-text">容量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容量内不会发生冲突"><span class="nav-number">3.</span> <span class="nav-text">容量内不会发生冲突</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变体"><span class="nav-number">4.</span> <span class="nav-text">变体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#与哈希表比较"><span class="nav-number">5.</span> <span class="nav-text">与哈希表比较</span></a></li></ol></div>
             
 
           </div>
