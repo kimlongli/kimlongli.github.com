@@ -597,11 +597,30 @@
 
 	}
 
+	function GetQueryString(name) {  
 
+	    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");  
+	    var r = window.location.search.substr(1).match(reg);  
+
+	    if (r != null) {   
+	        return unescape(r[2]);  
+	    }  
+
+	    return null;  
+	}     
+
+	filename = GetQueryString('filename');
+
+	if(filename != 'pong2.c8' && filename != 'invaders.c8' && filename != 'tetris.c8')
+		filename = 'pong2.c8';
+
+	
 	var chip8 = new Chip8();
-	chip8.loadApplication('pong2.c8');
+	chip8.loadApplication(filename);
 	//chip8.loadApplication('invaders.c8');
 	//chip8.loadApplication('tetris.c8');
+	
+	
 })();
 
 
