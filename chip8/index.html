@@ -5,7 +5,25 @@
 	<link rel="stylesheet" type="text/css" href="chip8.css">
 </head>
 <body>
+	<center><h3>Chip8 Emulator By Kimlong Lee</h3></center>
 	<canvas id="game_box" width=640 height=320></canvas>
+	<image id="chip8_sample" src="/uploads/chip8.png" />
+	<p id="tips">
+		<pre>
+		KEY BOARD MAPPING:
+		
+		Keypad                   Keyboard
+		+-+-+-+-+                +-+-+-+-+
+		|1|2|3|C|                |1|2|3|4|
+		+-+-+-+-+                +-+-+-+-+
+		|4|5|6|D|                |Q|W|E|R|
+		+-+-+-+-+       =>       +-+-+-+-+
+		|7|8|9|E|                |A|S|D|F|
+		+-+-+-+-+                +-+-+-+-+
+		|A|0|B|F|                |Z|X|C|V|
+		+-+-+-+-+                +-+-+-+-+
+		</pre>
+	</p>
 	<script type="text/javascript" src="chip8.js"></script>
 </body>
 </html>

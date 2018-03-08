@@ -1,5 +1,17 @@
 #game_box {
-	width: 640px;
+	width: 52%;
 	height: 320px;
-	border: solid 5px orange;
+	border: solid 1px black;
+	float:left;
+
+}
+
+#chip8_sample {
+	width: 45%;
+	float: right;
+}
+
+#tips {
+	width: 52%;
+	clear:both;
 }

@@ -238,7 +238,7 @@
 					console.log("Error: ROM too big for memory");
 
 				
-				function loop() {
+				/*function loop() {
 					while(true) {
 						that.emulateCycle();
 						if(that.drawFlag) {
@@ -253,26 +253,33 @@
 				
 				setTimeout(function() {	
 					loop();
-				}, 16);
+				}, 16);*/
 
 
 				
-				/*var start = null;
+				var start = null;
 
 				function step(timestamp) {
+					console.log('hhhh');
 				  	if (!start) start = timestamp;
 				  	var progress = timestamp - start;
 
-				  	console.log(timestamp);
-				  
-				  	if (progress > 1) {   
-				  		that.emulateCycle();
-						that.display();
+				  	if (progress > 16) {   
+				  		console.log("dddd");
+				  		while(true) {
+							that.emulateCycle();
+							if(that.drawFlag) {
+								that.display();
+								break;
+							}
+						}
 				  	}
+
 				  	window.requestAnimationFrame(step);
+				  	
 				}
 
-				window.requestAnimationFrame(step);*/
+				window.requestAnimationFrame(step);
 
 				
 			};
