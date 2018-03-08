@@ -1,0 +1,5 @@
+#game_box {
+	width: 640px;
+	height: 320px;
+	border: solid 5px orange;
+}
