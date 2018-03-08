@@ -258,21 +258,31 @@
 
 				
 				var start = null;
-
+				var counter = 0;
 				function step(timestamp) {
-					console.log('hhhh');
+					
 				  	if (!start) start = timestamp;
 				  	var progress = timestamp - start;
 
 				  	if (progress > 16) {   
-				  		console.log("dddd");
+				  		
 				  		while(true) {
+				  			counter++;
+				  			if(counter == 1000) {
+				  				counter = 0;
+				  				break;
+				  			}
+
 							that.emulateCycle();
 							if(that.drawFlag) {
 								that.display();
 								break;
 							}
 						}
+
+						
+
+						start = timestamp;
 				  	}
 
 				  	window.requestAnimationFrame(step);
@@ -611,7 +621,8 @@
 
 	filename = GetQueryString('filename');
 
-	if(filename != 'pong2.c8' && filename != 'invaders.c8' && filename != 'tetris.c8')
+	if(filename != 'pong2.c8' && filename != 'invaders.c8' && filename != 'tetris.c8' 
+		&& filename != 'tank.rom' && filename != 'pong.rom' && filename != '15puzzle.rom')
 		filename = 'pong2.c8';
 
 	
