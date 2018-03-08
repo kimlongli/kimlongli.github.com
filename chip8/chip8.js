@@ -28,6 +28,8 @@
 		this.end = function() {
 			//this.ctx.clearRect(0, 0, 640, 320);
 			this.ctx.drawImage(this.cacheCanvas, 0, 0, 640, 320);
+			this.ctx.restore();
+			this.cacheCtx.restore();
 		}
 
 		this.draw = function(x, y, isSet) {
@@ -197,7 +199,7 @@
 		}
 
 		that.display = function() {
-			if(that.drawFlag) {
+			
 
 				that.drawHelper.begin();
 				for(i = 0; i < 64; i++) {
@@ -210,10 +212,9 @@
 				}
 				that.drawHelper.end();
 
-
 				// Processed frame
 				that.drawFlag = false;
-			}
+			
 		}
 
 		that.loadApplication = function(filename) {
@@ -234,15 +235,45 @@
 					}
 				} 
 				else
-					printf("Error: ROM too big for memory");
+					console.log("Error: ROM too big for memory");
+
+				
+				function loop() {
+					while(true) {
+						that.emulateCycle();
+						if(that.drawFlag) {
+							that.display();
+							setTimeout(function() {	
+								loop();
+							}, 16);
+							break;
+						}
+					}
+				}
+				
+				setTimeout(function() {	
+					loop();
+				}, 16);
 
 
-				counter = 0;
-				setInterval(function() {
-					//console.log(counter++);
-					that.emulateCycle();
-					that.display();
-				}, 1);
+				
+				/*var start = null;
+
+				function step(timestamp) {
+				  	if (!start) start = timestamp;
+				  	var progress = timestamp - start;
+
+				  	console.log(timestamp);
+				  
+				  	if (progress > 1) {   
+				  		that.emulateCycle();
+						that.display();
+				  	}
+				  	window.requestAnimationFrame(step);
+				}
+
+				window.requestAnimationFrame(step);*/
+
 				
 			};
 
@@ -562,6 +593,8 @@
 
 	var chip8 = new Chip8();
 	chip8.loadApplication('pong2.c8');
+	//chip8.loadApplication('invaders.c8');
+	//chip8.loadApplication('tetris.c8');
 })();
 
 
