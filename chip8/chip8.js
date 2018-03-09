@@ -606,7 +606,7 @@
 				"blinky.rom", "hidden.rom", "pong.rom",  "tetris.rom", "wipeoff.rom",
 				"blitz.rom", "invaders.rom", "pong2.rom", "tictac.rom",  "breakout.rom",
 				"kaleid.rom", "puzzle.rom", "ufo.rom", "brix.rom", "maze.rom", "squash.rom", 
-				"vbrix.rom", "connect4.rom", "merlin.rom", "syzygy.rom", "vers.rom"];
+				"vbrix.rom", "connect4.rom", "merlin.rom", "syzygy.rom", "vers.rom", "airplane.rom"];
 
 	if(!games.includes(filename)) {
 		filename = "brix.rom";
