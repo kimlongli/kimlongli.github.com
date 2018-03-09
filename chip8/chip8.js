@@ -609,7 +609,7 @@
 				"vbrix.rom", "connect4.rom", "merlin.rom", "syzygy.rom", "vers.rom"];
 
 	if(!games.includes(filename)) {
-		filename = "breakout.rom";
+		filename = "brix.rom";
 	}
 
 	prehtml = "";
