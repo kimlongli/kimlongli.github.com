@@ -1,39 +1,93 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Chip8 Emulator</title>
 	<link rel="stylesheet" type="text/css" href="chip8.css">
 </head>
+
 <body>
-	<center><h3>Chip8 Emulator By Kimlong Lee</h3></center>
-	<canvas id="game_box" width=640 height=320></canvas>
-	<image id="chip8_sample" src="/uploads/chip8.jpeg" />
-	<div id="tips">
-		Games: <a href="?filename=pong2.c8">pong2</a>
-		<a href="?filename=tetris.c8">tetris</a>
+	<div class="content">
+		<h1>Chip8 Emulator</h1>
+		<div class="canvasWraper">
+			<canvas id="game_box" width=640 height=320></canvas>
+		</div>
+		<div class="bottom">
+			<div class="key_board_mapping">
+				<p class="kbm_title">KEY BOARD MAPPING:</p>
+				<div class="kbm_content">
+					<table border=1 cellpadding=0 cellspacing=0 class="keyPad">
+						<caption>Keypad</caption>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>C</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>D</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>E</td>
+						</tr>
+						<tr>
+							<td>A</td>
+							<td>0</td>
+							<td>B</td>
+							<td>f</td>
+						</tr>
+					</table>
+					<table border=1 cellpadding=0 cellspacing=0 class="keyBoard">
+						<caption>KeyBoard</caption>
+						<tr>
+							<td>1</td>
+							<td>2</td>
+							<td>3</td>
+							<td>C</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td>5</td>
+							<td>6</td>
+							<td>D</td>
+						</tr>
+						<tr>
+							<td>7</td>
+							<td>8</td>
+							<td>9</td>
+							<td>E</td>
+						</tr>
+						<tr>
+							<td>A</td>
+							<td>0</td>
+							<td>B</td>
+							<td>f</td>
+						</tr>
+					</table>
 
-		<a href="?filename=invaders.c8">invader</a>
-		<a href="?filename=tank.rom">tank</a>
-		<a href="?filename=pong.rom">pong</a>
-		<a href="?filename=15puzzle.rom">15puzzle</a>
+
+				</div>
+			</div>
+			<img src="https://kimlongli.github.io//uploads/chip8.jpeg" alt="">
+
+		</div>
+		<div class="games_content">
+			<h4>Games:</h4>
+			<p id="games"></p>
+		</div>
 		
-
-
-<pre>
-KEY BOARD MAPPING:
-
-Keypad                   Keyboard
-+-+-+-+-+                +-+-+-+-+
-|1|2|3|C|                |1|2|3|4|
-+-+-+-+-+                +-+-+-+-+
-|4|5|6|D|                |Q|W|E|R|
-+-+-+-+-+       =>       +-+-+-+-+
-|7|8|9|E|                |A|S|D|F|
-+-+-+-+-+                +-+-+-+-+
-|A|0|B|F|                |Z|X|C|V|
-+-+-+-+-+                +-+-+-+-+
-</pre>
 	</div>
+	<div class="footer">
+		<p>Developed By Kimlong Lee(Emulator) and Akaziki(Front End)<br>All Rights Reserved</p>
+	</div>
+
 	<script type="text/javascript" src="chip8.js"></script>
 </body>
+
 </html>

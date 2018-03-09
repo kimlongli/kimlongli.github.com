@@ -222,7 +222,7 @@
 			console.log("Loading: " + filename);
 
 			var oReq = new XMLHttpRequest();
-			oReq.open("GET", filename, true);
+			oReq.open("GET", "rom/" + filename, true);
 			oReq.responseType = "arraybuffer";
 
 			oReq.onload = function(oEvent) {
@@ -236,25 +236,6 @@
 				} 
 				else
 					console.log("Error: ROM too big for memory");
-
-				
-				/*function loop() {
-					while(true) {
-						that.emulateCycle();
-						if(that.drawFlag) {
-							that.display();
-							setTimeout(function() {	
-								loop();
-							}, 16);
-							break;
-						}
-					}
-				}
-				
-				setTimeout(function() {	
-					loop();
-				}, 16);*/
-
 
 				
 				var start = null;
@@ -619,12 +600,30 @@
 	    return null;  
 	}     
 
-	filename = GetQueryString('filename');
+	var filename = GetQueryString('filename');
 
-	if(filename != 'pong2.c8' && filename != 'invaders.c8' && filename != 'tetris.c8' 
-		&& filename != 'tank.rom' && filename != 'pong.rom' && filename != '15puzzle.rom')
-		filename = 'pong2.c8';
+	games = ["15puzzle.rom", "guess.rom", "missile.rom", "tank.rom", "wall.rom", 
+				"blinky.rom", "hidden.rom", "pong.rom",  "tetris.rom", "wipeoff.rom",
+				"blitz.rom", "invaders.rom", "pong2.rom", "tictac.rom",  "breakout.rom",
+				"kaleid.rom", "puzzle.rom", "ufo.rom", "brix.rom", "maze.rom", "squash.rom", 
+				"vbrix.rom", "connect4.rom", "merlin.rom", "syzygy.rom", "vers.rom"];
 
+	if(!games.includes(filename)) {
+		filename = "breakout.rom";
+	}
+
+	prehtml = "";
+	var counter = 0;
+	for(var i in games) {
+		counter++;
+		prehtml += "<a href=\"?filename=" + games[i] + "\">" + games[i] + "</a>" + "&nbsp&nbsp&nbsp&nbsp";
+		if(counter == 5) {
+			prehtml += "<br>";
+			counter = 0;
+		}
+	}
+
+	document.getElementById("games").innerHTML = prehtml;
 	
 	var chip8 = new Chip8();
 	chip8.loadApplication(filename);

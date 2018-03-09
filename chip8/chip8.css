@@ -1,18 +1,75 @@
-#game_box {
-	width: 52%;
+
+body{
+	width:100%;
+	height:100%;
+	background-color: white;
+
+}
+
+.content{
+	width:960px;
+	height:100%;
+	margin: 20px auto;
+	background-color: white;
+}
+
+h1{
+	text-align: center;
+}
+
+.canvasWraper{
+	width:640px;
+	height:320px;
+	margin:20px auto;
+	border: solid 5px black;
+}
+
+.bottom{
+	display:flex;
+	justify-content: center;
+}
+
+.key_board_mapping{
+	width:300px;
+	margin:20px 0;
+}
+
+.kbm_title{
+	text-align: center;
+}
+
+.kbm_content{
+	display: flex;
+	justify-content: center;
+	width:300px;
+}
+
+.games_content {
+	text-align: center;
+}
+
+.footer {
+	color: gray;
+	font-size: 0.7em;
+	text-align: center;
+}
+
+table{
+	width:100px;
+	margin:10px 20px;
+}
+
+tr td{
+	text-align: center;
+}
+
+img{
+	width:22%;
+	height:22%;
+	margin:40px 20px;
+}
+
+/* #game_box {
+	width: 640px;
 	height: 320px;
-	border: solid 1px black;
-	float:left;
-
-}
-
-#chip8_sample {
-	width: 45%;
-	float: right;
-}
-
-#tips {
-	width: 52%;
-	margin-left: 5%;
-	clear:both;
-}
+} */
