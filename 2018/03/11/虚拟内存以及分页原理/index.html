@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="李金隆的博客, Jinlong blog, 副业造轮子" />
+  <meta name="keywords" content="essays," />
 
 
 
@@ -84,37 +84,21 @@
 
 
 
-<meta name="description" content="github地址https://github.com/kimlongli/min-diff此项目暂时不超过一百行代码，主体文件为diff.js。
-使用方法如下：
-
-引入js文件
-1&amp;lt;script type=&quot;text/javascript&quot; src=&quot;diff.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
-
-调用diff函数获取结果
-1result = diff(txt1, txt2);">
+<meta name="description" content="每一个进程都需要一个Page Table来保存本进程的虚拟页和物理页的映射关系。如果虚拟内存空间为4GB，一个Page Table Entry为4Bytes，则一个进程的Page Table则要4MB（2GB / 4KB * 4Bytes)的空间来存储，这个空间成本的开销是非常大的。
+为了解决这个问题，引入了2级（多级）Page Table，这样内存中只需要存进程的一级Page Table，二级">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一个基于动态规划lcs算法的迷你文本比较器">
-<meta property="og:url" content="http://kimlongli.github.io/2017/03/28/一个基于动态规划lcs算法的迷你文本比较器/index.html">
+<meta property="og:title" content="虚拟内存以及分页原理">
+<meta property="og:url" content="http://kimlongli.github.io/2018/03/11/虚拟内存以及分页原理/index.html">
 <meta property="og:site_name" content="Jinlong's Blog">
-<meta property="og:description" content="github地址https://github.com/kimlongli/min-diff此项目暂时不超过一百行代码，主体文件为diff.js。
-使用方法如下：
-
-引入js文件
-1&amp;lt;script type=&quot;text/javascript&quot; src=&quot;diff.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
-
-调用diff函数获取结果
-1result = diff(txt1, txt2);">
-<meta property="og:updated_time" content="2017-03-28T10:38:13.000Z">
+<meta property="og:description" content="每一个进程都需要一个Page Table来保存本进程的虚拟页和物理页的映射关系。如果虚拟内存空间为4GB，一个Page Table Entry为4Bytes，则一个进程的Page Table则要4MB（2GB / 4KB * 4Bytes)的空间来存储，这个空间成本的开销是非常大的。
+为了解决这个问题，引入了2级（多级）Page Table，这样内存中只需要存进程的一级Page Table，二级">
+<meta property="og:image" content="http://kimlongli.github.io/uploads/page.jpeg">
+<meta property="og:updated_time" content="2018-03-11T10:41:48.157Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="一个基于动态规划lcs算法的迷你文本比较器">
-<meta name="twitter:description" content="github地址https://github.com/kimlongli/min-diff此项目暂时不超过一百行代码，主体文件为diff.js。
-使用方法如下：
-
-引入js文件
-1&amp;lt;script type=&quot;text/javascript&quot; src=&quot;diff.js&quot;&amp;gt;&amp;lt;/script&amp;gt;
-
-调用diff函数获取结果
-1result = diff(txt1, txt2);">
+<meta name="twitter:title" content="虚拟内存以及分页原理">
+<meta name="twitter:description" content="每一个进程都需要一个Page Table来保存本进程的虚拟页和物理页的映射关系。如果虚拟内存空间为4GB，一个Page Table Entry为4Bytes，则一个进程的Page Table则要4MB（2GB / 4KB * 4Bytes)的空间来存储，这个空间成本的开销是非常大的。
+为了解决这个问题，引入了2级（多级）Page Table，这样内存中只需要存进程的一级Page Table，二级">
+<meta name="twitter:image" content="http://kimlongli.github.io/uploads/page.jpeg">
 
 
 
@@ -149,13 +133,13 @@
 
 
 
-  <link rel="canonical" href="http://kimlongli.github.io/2017/03/28/一个基于动态规划lcs算法的迷你文本比较器/"/>
+  <link rel="canonical" href="http://kimlongli.github.io/2018/03/11/虚拟内存以及分页原理/"/>
 
 
 
 
 
-  <title> 一个基于动态规划lcs算法的迷你文本比较器 | Jinlong's Blog </title>
+  <title> 虚拟内存以及分页原理 | Jinlong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -276,7 +260,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2017/03/28/一个基于动态规划lcs算法的迷你文本比较器/">
+  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2018/03/11/虚拟内存以及分页原理/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李金隆">
@@ -300,7 +284,7 @@
             
             
               
-                一个基于动态规划lcs算法的迷你文本比较器
+                虚拟内存以及分页原理
               
             
           </h1>
@@ -313,8 +297,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-03-28T18:38:13+08:00">
-                2017-03-28
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-11T18:22:59+08:00">
+                2018-03-11
               </time>
             
 
@@ -349,18 +333,12 @@
       
 
       
-        <p>github地址<a href="https://github.com/kimlongli/min-diff" target="_blank" rel="external">https://github.com/kimlongli/min-diff</a><br>此项目暂时不超过一百行代码，主体文件为diff.js。</p>
-<p>使用方法如下：</p>
-<ul>
-<li><p>引入js文件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"diff.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure>
-</li>
-<li><p>调用diff函数获取结果</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">result = diff(txt1, txt2);</div></pre></td></tr></table></figure>
-</li>
+        <ul>
+<li>每一个进程都需要一个Page Table来保存本进程的虚拟页和物理页的映射关系。如果虚拟内存空间为4GB，一个Page Table Entry为4Bytes，则一个进程的Page Table则要4MB（2GB / 4KB * 4Bytes)的空间来存储，这个空间成本的开销是非常大的。</li>
+<li>为了解决这个问题，引入了2级（多级）Page Table，这样内存中只需要存进程的一级Page Table，二级Page Table只有在需要的时候才会被加载到内存，空间成本大大减少，但是却增加了系统处理Page Fault时候的成本(增加了时延）。</li>
+<li>为了解决这个问题，引入TLB（Translation Lookaside Buffer）。TLB相当于内存中的Page Table的硬件实现，保存的也是虚拟页到物理页的映射关系。当进程需要访存的时候，会先到TLB找，找不到再走内存中Page Table的路线，并利用LRU规则更新TLB中的内容。</li>
 </ul>
-<p>其中txt1和txt2为需要比较的文本内容，比较结果将会以以下结果返回：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> <span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</div><div class="line"> 	a = <span class="number">1</span>;</div><div class="line">+	b = a + <span class="number">2</span>;</div><div class="line">-	c = b;</div><div class="line"> &#125;</div></pre></td></tr></table></figure></p>
-<p>每行前面的+代表这是增加的行，-代表这是减少的行。<br>可以通过<a href="https://kimlongli.github.io/demo/diff-demo.html">demo</a>来了解具体的实例。</p>
+<p><img src="/uploads/page.jpeg" alt="/uploads/page.jpeg"><br><a href="https://courses.engr.illinois.edu/cs241/sp2014/lecture/09-VirtualMemory_II_sol.pdf" target="_blank" rel="external">Virtual Memory and Paging</a></p>
 
       
     </div>
@@ -386,8 +364,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/02/12/Linux下编写高性能的网络程序/" rel="next" title="Linux下编写高性能的网络程序">
-                <i class="fa fa-chevron-left"></i> Linux下编写高性能的网络程序
+              <a href="/2018/03/11/exit和-exit/" rel="next" title="exit和_exit">
+                <i class="fa fa-chevron-left"></i> exit和_exit
               </a>
             
           </div>
@@ -395,10 +373,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/26/快速幂算法/" rel="prev" title="快速幂运算算法">
-                快速幂运算算法 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -431,7 +405,7 @@
           if(document.location.protocol == "http:") {
             document.getElementById("shuoshuo_comment").innerHTML = '<h3>Comments</h3>\
               <hr>\
-              <div id="comment_list" data-key="2017/03/28/一个基于动态规划lcs算法的迷你文本比较器/">\
+              <div id="comment_list" data-key="2018/03/11/虚拟内存以及分页原理/">\
               </div>\
               <div id="post_box">\
                 <input type="text" id="name_" placeholder="input your name here" /><br>\
