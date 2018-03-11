@@ -84,16 +84,18 @@
 
 
 
-<meta name="description" content="Raft的出现预示着被Paxos支配的时代即将结束了，是分布式的福音。Raft算法简单且好理解，通读Raft论文后，再通过raft.github.io上的raft小工具来进行测试，基本上就可以理解Raft算法的basic版本了。理解Raft并不难，难的是Raft的实现，以及相关的性能优化，比如一次AppendEntry RPC发送尽量多的log entry，使用snapshot技术来优化宕机恢复时">
+<meta name="description" content="mark.exit会调用atexit上注册的函数，但_exit不会。_exit一般用在child process执行exec类函数失败之后。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="强一致性算法Raft-分布式的福音">
-<meta property="og:url" content="http://kimlongli.github.io/2018/02/23/强一致性算法Raft-分布式的福音/index.html">
+<meta property="og:title" content="exit和_exit">
+<meta property="og:url" content="http://kimlongli.github.io/2018/03/11/exit和-exit/index.html">
 <meta property="og:site_name" content="Jinlong's Blog">
-<meta property="og:description" content="Raft的出现预示着被Paxos支配的时代即将结束了，是分布式的福音。Raft算法简单且好理解，通读Raft论文后，再通过raft.github.io上的raft小工具来进行测试，基本上就可以理解Raft算法的basic版本了。理解Raft并不难，难的是Raft的实现，以及相关的性能优化，比如一次AppendEntry RPC发送尽量多的log entry，使用snapshot技术来优化宕机恢复时">
-<meta property="og:updated_time" content="2018-02-23T14:36:58.495Z">
+<meta property="og:description" content="mark.exit会调用atexit上注册的函数，但_exit不会。_exit一般用在child process执行exec类函数失败之后。">
+<meta property="og:image" content="http://kimlongli.github.io/uploads/exit.jpeg">
+<meta property="og:updated_time" content="2018-03-11T09:09:19.646Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="强一致性算法Raft-分布式的福音">
-<meta name="twitter:description" content="Raft的出现预示着被Paxos支配的时代即将结束了，是分布式的福音。Raft算法简单且好理解，通读Raft论文后，再通过raft.github.io上的raft小工具来进行测试，基本上就可以理解Raft算法的basic版本了。理解Raft并不难，难的是Raft的实现，以及相关的性能优化，比如一次AppendEntry RPC发送尽量多的log entry，使用snapshot技术来优化宕机恢复时">
+<meta name="twitter:title" content="exit和_exit">
+<meta name="twitter:description" content="mark.exit会调用atexit上注册的函数，但_exit不会。_exit一般用在child process执行exec类函数失败之后。">
+<meta name="twitter:image" content="http://kimlongli.github.io/uploads/exit.jpeg">
 
 
 
@@ -128,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://kimlongli.github.io/2018/02/23/强一致性算法Raft-分布式的福音/"/>
+  <link rel="canonical" href="http://kimlongli.github.io/2018/03/11/exit和-exit/"/>
 
 
 
 
 
-  <title> 强一致性算法Raft-分布式的福音 | Jinlong's Blog </title>
+  <title> exit和_exit | Jinlong's Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -255,7 +257,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2018/02/23/强一致性算法Raft-分布式的福音/">
+  <link itemprop="mainEntityOfPage" href="http://kimlongli.github.io/2018/03/11/exit和-exit/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="name" content="李金隆">
@@ -279,7 +281,7 @@
             
             
               
-                强一致性算法Raft-分布式的福音
+                exit和_exit
               
             
           </h1>
@@ -292,8 +294,8 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T22:21:31+08:00">
-                2018-02-23
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-11T16:57:10+08:00">
+                2018-03-11
               </time>
             
 
@@ -328,8 +330,7 @@
       
 
       
-        <p>Raft的出现预示着被Paxos支配的时代即将结束了，是分布式的福音。<br>Raft算法简单且好理解，通读Raft论文后，再通过raft.github.io上的raft小工具来进行测试，基本上就可以理解Raft算法的basic版本了。理解Raft并不难，难的是Raft的实现，以及相关的性能优化，比如一次AppendEntry RPC发送尽量多的log entry，使用snapshot技术来优化宕机恢复时间以及减少存储负担，使用尽可能高性能的RPC传输协议（比如Google Protocol Buffer），以及Raft和其它算法（比如分布式事务、bitcask模型等）的友好结合。要把Raft实现出来并且应用到现有的工业生产环境中真的挺难的。毕设入坑ing，望早日弄出来。。。</p>
-<p><a href="https://raft.github.io/raft.pdf" target="_blank" rel="external">raft.pdf</a><br><a href="https://raft.github.io" target="_blank" rel="external">raft.github.io</a></p>
+        <p>mark.<br>exit会调用atexit上注册的函数，但_exit不会。_exit一般用在child process执行exec类函数失败之后。<br><img src="/uploads/exit.jpeg" alt="/uploads/exit.jpeg"></p>
 
       
     </div>
@@ -355,8 +356,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/23/Naive-Bayes-Classifier/" rel="next" title="Naive Bayes Classifier">
-                <i class="fa fa-chevron-left"></i> Naive Bayes Classifier
+              <a href="/2018/03/09/chip8模拟器/" rel="next" title="chip8模拟器">
+                <i class="fa fa-chevron-left"></i> chip8模拟器
               </a>
             
           </div>
@@ -364,10 +365,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/06/使用CRTP/" rel="prev" title="使用CRTP">
-                使用CRTP <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -400,7 +397,7 @@
           if(document.location.protocol == "http:") {
             document.getElementById("shuoshuo_comment").innerHTML = '<h3>Comments</h3>\
               <hr>\
-              <div id="comment_list" data-key="2018/02/23/强一致性算法Raft-分布式的福音/">\
+              <div id="comment_list" data-key="2018/03/11/exit和-exit/">\
               </div>\
               <div id="post_box">\
                 <input type="text" id="name_" placeholder="input your name here" /><br>\
