@@ -92,7 +92,7 @@
 <meta property="og:site_name" content="Jinlong's Blog">
 <meta property="og:description" content="一天早上，小明在家里无聊，打开编辑器写了一段程序：1234567#include &amp;lt;cstdio&amp;gt;int main() &amp;#123;	printf(&quot;55555\n&quot;);	printf(&quot;Xiao Ming loves Xiao Dong.\n&quot;);	return 0;&amp;#125;
 小明喜欢着他的室友小东，可是他一直都不敢说，因为他怕说了之后，就连室友都做不了了，所以只能在无聊的时候写">
-<meta property="og:updated_time" content="2018-03-17T10:05:26.266Z">
+<meta property="og:updated_time" content="2018-03-17T15:14:09.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小明的故事">
 <meta name="twitter:description" content="一天早上，小明在家里无聊，打开编辑器写了一段程序：1234567#include &amp;lt;cstdio&amp;gt;int main() &amp;#123;	printf(&quot;55555\n&quot;);	printf(&quot;Xiao Ming loves Xiao Dong.\n&quot;);	return 0;&amp;#125;
@@ -337,7 +337,7 @@
 <p>为什么！！！为什么我明明打印的是“Xiao Ming loves Xiao Dong”，输出的却是“Xiao Dong loves Xiao Ming.”呢！！！难道…..小明脑子里想着各种狗血的可能性。不，不可能，小明把自己从思绪中拽了回来，叹了口气，肯定是上天看我可怜，用某种不可预知的力量让我的电脑发生了几个比特的错位，导致了现在这个结果，逗我开心吧。于是，小明在代码中加了一个for循环：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"55555\n"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">int</span> i;</div><div class="line">	<span class="comment">/* 循环100次为了确认刚才发生的是意外 */</span></div><div class="line">	<span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++)</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"Xiao Ming loves Xiao Dong.\n"</span>);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>这样总好了吧。这次命令行应该会输出100个“Xiao Ming loves Xiao Dong.”了吧。小明想着。<br>编译，运行。眼前的一幕让小明彻底傻眼了….屏幕出现是齐刷刷的100行“Xiao Dong loves Xiao Ming.”。为什么！！！到底是为什么！！！此时的小明又激动又崩溃又开心。突然，他想起了几天前看到的一篇文章：<br><a href="http://samanbarghi.com/blog/2014/09/05/how-to-wrap-a-system-call-libc-function-in-linux/" target="_blank" rel="external">How to wrap a system call (libc function) in Linux</a><br>然后又想起了前几天电脑借过给小东用。难道？！难道？！小明不敢相信自己的猜测，他用颤抖着的手打开家目录下的.bashrc，文件末尾的几行文字让他老脸一红。也许，他的猜测是正确的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">...</div><div class="line"># modified by Xiao Dong on 2018-2-14</div><div class="line">export LD_PRELOAD=/usr/lib/xiaodong.so</div><div class="line">...</div></pre></td></tr></table></figure></p>
 <p>小明用nm命令查看了xiaodong.so里面实现了的API：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xiaoming@ubuntu:~/code$ nm /usr/lib/xiaodong.so</div><div class="line">...</div><div class="line">0000000000000760 T puts</div><div class="line">...</div></pre></td></tr></table></figure></p>
-<p>这个xiaodong.so实现了一个跟libc的puts函数同名的puts，如果在程序执行前预先加载这个xiaodong.so，这个puts就会覆盖掉libc原先的puts，而printf函数内部实现刚好又是调用puts…所以说，小东肯定在xiaodong.so里面的puts函数上做了一些手脚。咦，说不定这个so的源代码还藏在这台电脑的某个角落里呢，看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xiaoming@ubuntu:~/code$ sudo updatedb</div><div class="line">xiaoming@ubuntu:~/code$ locate xiaodong</div><div class="line">/home/xiaoming/.test/xiaodong.cpp</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>这个xiaodong.so实现了一个跟libc的puts函数同名的puts，如果在程序执行时预先加载这个xiaodong.so，这个puts就会覆盖掉libc原先的puts，而printf函数内部实现刚好又是调用puts…所以说，小东肯定在xiaodong.so里面的puts函数上做了一些手脚。咦，说不定这个so的源代码还藏在这台电脑的某个角落里呢，看看：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">xiaoming@ubuntu:~/code$ sudo updatedb</div><div class="line">xiaoming@ubuntu:~/code$ locate xiaodong</div><div class="line">/home/xiaoming/.test/xiaodong.cpp</div><div class="line">...</div></pre></td></tr></table></figure></p>
 <p>原来，源代码藏在家目录下的一个隐藏的文件夹里，内容如下：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> __USE_GNU</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> __USE_GNU</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/types.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;dlfcn.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">typedef</span> <span class="title">ssize_t</span> <span class="params">(*<span class="keyword">puts_func_t</span>)</span><span class="params">(<span class="keyword">const</span> <span class="keyword">void</span>*)</span></span>; </div><div class="line"><span class="keyword">puts_func_t</span> g_real_puts = (<span class="keyword">puts_func_t</span>)dlsym(RTLD_NEXT, <span class="string">"puts"</span>);</div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</div><div class="line">	<span class="function"><span class="keyword">int</span> <span class="title">puts</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* buf)</span> </span>&#123;</div><div class="line">		<span class="keyword">if</span>(<span class="built_in">strcmp</span>(buf, <span class="string">"Xiao Ming loves Xiao Dong."</span>) == <span class="number">0</span>)</div><div class="line">			<span class="keyword">return</span> g_real_puts(<span class="string">"Xiao Dong loves Xiao Ming."</span>);</div><div class="line">		<span class="keyword">return</span> g_real_puts(buf);</div><div class="line">	&#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
 <p>至此，真相就大白了。<br>死鬼，原来你一直也喜欢着我呀，小明的脸变得更红了。怎么办？怎么办？是要去找他呢，还是先假装什么也不知道？小明的内心挣扎着…..(未完待续)</p>
 
@@ -473,51 +473,7 @@
             
           
             
-          
-            
               
-            
-          
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-              
-            
-          
-            
-          
-            
-              
-            
-          
-            
-          
-            
-          
-            
-              
-            
-          
-            
-          
-            
-          
-            
-          
-            
-          
-            
-              
-            
-          
             
           
             
@@ -535,11 +491,55 @@
             
           
             
+              
+            
+          
+            
+              
+            
+          
+            
+              
+            
+          
+            
           
             
           
             
               
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+              
+            
+          
+            
+          
+            
+              
+            
+          
+            
+          
+            
+              
+            
+          
+            
+          
             
           
             
