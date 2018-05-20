@@ -84,12 +84,14 @@
 
 
 
-<meta name="description" content="图形界面由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。比如说在*nix系统中直接编译我们">
+<meta name="description" content="2018/5/20更新：已把源代码分享到Github，并推出了1.0版本（当然只是改进了一下界面）。推出了第一版对外接口，大家可以很容易地将此五子棋AI整合到自己的项目中，点击此处转到项目的Github链接。
+图形界面由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就">
 <meta property="og:type" content="article">
 <meta property="og:title" content="如何设计一个还可以的五子棋AI">
 <meta property="og:url" content="http://kimlongli.github.io/2016/12/14/如何设计一个还可以的五子棋AI/index.html">
 <meta property="og:site_name" content="Jinlong's Blog">
-<meta property="og:description" content="图形界面由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。比如说在*nix系统中直接编译我们">
+<meta property="og:description" content="2018/5/20更新：已把源代码分享到Github，并推出了1.0版本（当然只是改进了一下界面）。推出了第一版对外接口，大家可以很容易地将此五子棋AI整合到自己的项目中，点击此处转到项目的Github链接。
+图形界面由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就">
 <meta property="og:image" content="http://kimlongli.github.io/uploads/wuziqi3.jpg">
 <meta property="og:image" content="http://kimlongli.github.io/uploads/wuziqi4.jpg">
 <meta property="og:image" content="http://kimlongli.github.io/uploads/score.jpg">
@@ -98,10 +100,11 @@
 <meta property="og:image" content="http://kimlongli.github.io/uploads/score3.jpg">
 <meta property="og:image" content="http://kimlongli.github.io/uploads/wuziqi1.jpg">
 <meta property="og:image" content="http://kimlongli.github.io/uploads/wuziqi2.jpg">
-<meta property="og:updated_time" content="2017-01-20T14:17:16.000Z">
+<meta property="og:updated_time" content="2018-05-20T07:19:08.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何设计一个还可以的五子棋AI">
-<meta name="twitter:description" content="图形界面由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。比如说在*nix系统中直接编译我们">
+<meta name="twitter:description" content="2018/5/20更新：已把源代码分享到Github，并推出了1.0版本（当然只是改进了一下界面）。推出了第一版对外接口，大家可以很容易地将此五子棋AI整合到自己的项目中，点击此处转到项目的Github链接。
+图形界面由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就">
 <meta name="twitter:image" content="http://kimlongli.github.io/uploads/wuziqi3.jpg">
 
 
@@ -337,7 +340,8 @@
       
 
       
-        <h3 id="图形界面"><a href="#图形界面" class="headerlink" title="图形界面"></a>图形界面</h3><p>由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。<br>比如说在*nix系统中直接编译我们写好的代码成so库就好了，而在Windows中函数则要额外加上<strong>declspec(dllexport)或</strong>declspec(dllimport)声明，例如：</p>
+        <p>2018/5/20更新：<font color="red">已把源代码分享到Github，并推出了1.0版本（当然只是改进了一下界面）。推出了第一版对外接口，大家可以很容易地将此五子棋AI整合到自己的项目中，点击<a href="https://kimlongli.github.io/2016/12/14/%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E8%BF%98%E5%8F%AF%E4%BB%A5%E7%9A%84%E4%BA%94%E5%AD%90%E6%A3%8BAI/">此处</a>转到项目的Github链接。</font></p>
+<h3 id="图形界面"><a href="#图形界面" class="headerlink" title="图形界面"></a>图形界面</h3><p>由于图形界面不是本次讨论的重点，所以只用python实现了一个简单的图形界面，然后用C++来实现算法部分的内容，编译成动态链接库，在python界面程序中调用动态链接库中的相关函数就可以了。选择python是因为考虑到它的夸平台性，在各大操作系统都可以直接解释执行。对于动态链接库，Linux是so，而Windows是dll，代码写法略有不同，但也差别不大。<br>比如说在*nix系统中直接编译我们写好的代码成so库就好了，而在Windows中函数则要额外加上<strong>declspec(dllexport)或</strong>declspec(dllimport)声明，例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">ifdef</span> BUILD_DLL</span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> DLL_EXPORT __declspec(dllexport)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line">	<span class="meta">#<span class="meta-keyword">define</span> DLL_EXPORT __declspec(dllimport)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line"></div><div class="line"><span class="keyword">extern</span> <span class="string">"C"</span> &#123;</div><div class="line">	<span class="function">DLL_EXPORT <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</div><div class="line">		<span class="keyword">return</span> a + b;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>注意，如果是用C++，需要用extern “C” {}把导出函数括起来，否则C++中的函数名字修饰（Decorated Name）会导致在加载动态链接库中相应函数的时候找不到函数名</p>
 <p>另外附上*uix平台和Windows平台编译生成动态链接库的命令：<br>Linux<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">g++ -shared <span class="_">-f</span>PIC -o libfivechess.so fivechess.cpp</div></pre></td></tr></table></figure></p>
@@ -501,27 +505,9 @@
             
           
             
-              
-            
           
             
               
-            
-          
-            
-              
-            
-          
-            
-          
-            
-              
-            
-          
-            
-          
-            
-          
             
           
             
@@ -539,18 +525,6 @@
             
           
             
-              
-            
-          
-            
-              
-            
-          
-            
-          
-            
-          
-            
           
             
               
@@ -563,9 +537,7 @@
             
           
             
-          
-            
-          
+              
             
           
             
@@ -589,11 +561,43 @@
             
           
             
+              
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
           
             
               
             
           
+            
+              
+            
+          
+            
+          
+            
+              
+            
+          
+            
+          
+            
+          
+            
+          
+            
+          
+            
+              
             
           
             
